@@ -6,8 +6,17 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+import pymongo
 
-
-class DygodPipeline:
-    def process_item(self, item, spider):
+class DygodPipeline(object):
+    #def process_item(self, item, spider):
+        #return item
+    def __init__(self):
+        client=pymongo.MongoClient(host='127.0.0.1',port=27017)
+        db=client['dytt']
+        self.dbsheet=db['dytt88']
+    
+    def process_item(self,item,spider):
+        sheet=dict(item)
+        self.dbsheet.insert(sheet)
         return item

@@ -31,8 +31,8 @@ class DyttSpider(scrapy.Spider):
 
     def ThirdParse(self,response):
         item=ThirdItem()
-        item['image']=response.xpath('//*[@id="Zoom"]/img[@src]').get()
-        item['detail']=response.xpath('//*[@id="Zoom"]/br/text()').getall()
+        item['image']=response.xpath('//*[@id="Zoom"]/img/@src').get()
+        item['detail']=response.xpath('//*[@id="Zoom"]/br//text()').getall()
         item['name']=response.css('.co_area2 h1::text').get()
         item['magnet']=response.css('#downlist a::attr(href)').getall()
         yield item
