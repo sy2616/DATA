@@ -9,6 +9,7 @@ import scrapy
 class Mm133Item(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    # title=scrapy.Field()
+    # titleurl=scrapy.Field()
     name=scrapy.Field()
     nameurl=scrapy.Field()
-

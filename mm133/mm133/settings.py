@@ -11,10 +11,10 @@ BOT_NAME = 'mm133'
 
 SPIDER_MODULES = ['mm133.spiders']
 NEWSPIDER_MODULE = 'mm133.spiders'
-IMAGES_STORE='D:\MEIZI'
+IMAGES_STORE = 'D:\ssmm'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'mm133 (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36 Edg/84.0.522.52'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -25,35 +25,39 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 2
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+   #'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
    'Accept-Language': 'en',
-   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36 Edg/84.0.522.52',
+   'authority': 'img1.mmmw.net',
+   'accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+   'accept-encoding': 'gzip, deflate, br',
+   'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6',
+   'dnt': '1',
 }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'mm133.middlewares.Mm133SpiderMiddleware': 543,
-#}
+SPIDER_MIDDLEWARES = {
+   'mm133.middlewares.Mm133SpiderMiddleware': 1,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'mm133.middlewares.Mm133DownloaderMiddleware': 1,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#     'mm133.middlewares.Mm133DownloaderMiddleware': 1,
+# }
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -65,6 +69,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'mm133.pipelines.Mm133Pipeline': 300,
+    'mm133.pipelines.MmPipeline': 330,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

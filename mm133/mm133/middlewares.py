@@ -9,7 +9,7 @@ from scrapy import signals
 from itemadapter import is_item, ItemAdapter
 
 
-class Mm133SpiderMiddleware:
+class Mm133SpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -54,7 +54,11 @@ class Mm133SpiderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
-
+    
+    def process_request(self,request,spider):
+        referer=request.url
+        if referer:
+            request.headers['referer']=referer
 
 class Mm133DownloaderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
@@ -78,10 +82,7 @@ class Mm133DownloaderMiddleware:
         # - or return a Request object
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
-        #return None
-        referer=request.url
-        if referer:
-            request.headers['referer']=referer
+        return None
 
     def process_response(self, request, response, spider):
         # Called with the response returned from the downloader.
