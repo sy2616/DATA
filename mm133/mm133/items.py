@@ -13,3 +13,4 @@ class Mm133Item(scrapy.Item):
     # titleurl=scrapy.Field()
     name=scrapy.Field()
     nameurl=scrapy.Field()
+    referer=scrapy.Field()

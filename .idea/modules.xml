@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DATA.iml" filepath="$PROJECT_DIR$/.idea/DATA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ProxyPool/.idea/ProxyPool.iml" filepath="$PROJECT_DIR$/../ProxyPool/.idea/ProxyPool.iml" />
     </modules>
   </component>
 </project>

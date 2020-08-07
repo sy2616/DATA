@@ -8,8 +8,13 @@ from scrapy import signals
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
 
+class MMMSpider(object):
+    def process_request(self,request,spider):
+        referer=request.url
+        if referer:
+            request.headers['referer']=referer
 
-class Mm133SpiderMiddleware(object):
+class Mm133SpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -56,10 +61,10 @@ class Mm133SpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
     
     def process_request(self,request,spider):
-        referer=request.url
-        if referer:
-            request.headers['referer']=referer
-
+        # referer=request.url
+        # if referer:
+        #     request.headers['referer']=referer
+        return None
 class Mm133DownloaderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the

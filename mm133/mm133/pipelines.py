@@ -19,7 +19,8 @@ class Mm133Pipeline(ImagesPipeline):
     def get_media_requests(self,item,info):
         # for img in item['nameurl']:
         img=item['nameurl']
-        yield scrapy.Request(url=img)
+        yield scrapy.Request(url=img,headers={'Referer':item['referer']})
+
     
     # def file_path(self,request,response=None,info=None):
     #     name=request.meta['item']

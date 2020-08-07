@@ -6,6 +6,9 @@ class MmSpider(scrapy.Spider):
     allowed_domains = ['www.mm131.net']
     start_urls = ['https://www.mm131.net/xinggan/']
 
+    # def start_requests(self):
+    #     yield scrapy.Request(self.start_urls,callback=self.parse,headers={'Referer':})
+
     def parse(self, response):
         #print(response.text)
         res=response.css('dl.list-left dd')
@@ -17,11 +20,11 @@ class MmSpider(scrapy.Spider):
         # if res[-1].css('.page a::text').get()=='下一页':
         #     next_url='https://www.mm131.net/xinggan/'+res[-1].css('.page a::attr(href)').get()
         #     yield scrapy.Request(url=next_url,callback=self.parse)
-        next_url=response.css('body > div.main > dl > dd.page > a:nth-last-child(2)::attr(href)').get()
-        if next_url is not None:
-            next_url=response.urljoin(next_url)
-            yield scrapy.Request(next_url,callback=self.parse)
-        yield scrapy.Request(url=titleurl,callback=self.contentparse)
+            next_url=response.css('body > div.main > dl > dd.page > a:nth-last-child(2)::attr(href)').get()
+            if next_url is not None:
+                next_url=response.urljoin(next_url)
+                yield scrapy.Request(next_url,callback=self.parse)
+            yield scrapy.Request(url=titleurl,callback=self.contentparse)
 
     
     def contentparse(self,response):
@@ -31,8 +34,10 @@ class MmSpider(scrapy.Spider):
         # item['name']=response.meta['name']
         # list=[]
         item['nameurl']=response.css('body > div.content > div.content-pic > a > img::attr(src)').get()
-        #item['nameurl']=list
+        #item['nameurl']=list添加referer
+        item['referer']=response.url
         yield item
         next_page=response.css('body > div.content > div.content-page > a.page-ch::attr(href)').get()
         if next_page is not None:
-            yield response.follow(next_page,callback=self.contentparse)
+            next_page='https://www.mm131.net/xinggan/'+next_page
+            yield scrapy.Request(next_page,callback=self.contentparse)
