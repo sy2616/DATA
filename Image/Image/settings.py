@@ -8,7 +8,7 @@
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 BOT_NAME = 'Image'
-
+FILES_STORE ='D:\AS'
 SPIDER_MODULES = ['Image.spiders']
 NEWSPIDER_MODULE = 'Image.spiders'
 IMAGES_STORE = 'D:\sddd'
